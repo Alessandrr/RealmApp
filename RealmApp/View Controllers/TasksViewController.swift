@@ -54,6 +54,15 @@ class TasksViewController: UITableViewController {
         return cell
     }
     
+    //MARK: - Table view delegate
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let task = indexPath.section == 0
+        ? currentTasks[indexPath.row]
+        : currentTasks[indexPath.row]
+        
+        return UISwipeActionsConfiguration()
+    }
+    
     @objc private func addButtonPressed() {
         showAlert()
     }
@@ -68,8 +77,9 @@ extension TasksViewController {
         let alert = UIAlertController.createAlertController(withTitle: title, andMessage: "What do you want to do?")
         
         alert.action(with: task) { [weak self] taskTitle, note in
-            if let _ = task, let _ = completion {
-                //TODO: - Edit task
+            if let task = task, let completion = completion {
+                StorageManager.shared.edit(task, newName: taskTitle, newNote: note)
+                completion()
             } else {
                 self?.save(task: taskTitle, withNote: note)
             }

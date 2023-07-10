@@ -51,6 +51,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F7170182A5BD2D000362DB5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3A276F8D2A59734700A7A25F /* AppDelegate.swift */,
+				3A276F8F2A59734700A7A25F /* SceneDelegate.swift */,
+				3A276F9B2A59734900A7A25F /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		3A276F812A59734700A7A25F = {
 			isa = PBXGroup;
 			children = (
@@ -74,11 +84,9 @@
 				3A276FAC2A5980CC00A7A25F /* Services */,
 				3A276FAB2A5980C700A7A25F /* Models */,
 				3A276FAA2A5980BE00A7A25F /* View Controllers */,
-				3A276F8D2A59734700A7A25F /* AppDelegate.swift */,
-				3A276F8F2A59734700A7A25F /* SceneDelegate.swift */,
+				1F7170182A5BD2D000362DB5 /* Config */,
 				3A276FAD2A5980D500A7A25F /* Storyboards */,
 				3A276F962A59734900A7A25F /* Assets.xcassets */,
-				3A276F9B2A59734900A7A25F /* Info.plist */,
 			);
 			path = RealmApp;
 			sourceTree = "<group>";
@@ -359,7 +367,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RealmApp/Info.plist;
+				INFOPLIST_FILE = RealmApp/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -389,7 +397,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RealmApp/Info.plist;
+				INFOPLIST_FILE = RealmApp/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -24,7 +24,7 @@ class StorageManager {
     
     func save(_ taskList: String, completion: (TaskList) -> Void) {
         write {
-            let taskList = TaskList(value: [taskList])
+            let taskList = TaskList(value: [taskList, Date.now])
             realm.add(taskList)
             completion(taskList)
         }
@@ -58,6 +58,14 @@ class StorageManager {
         }
     }
     
+    func edit(_ task: Task, newName: String, newNote: String) {
+        write {
+            task.name = newName
+            task.note = newNote
+        }
+    }
+    
+    //MARK: - Realm write
     private func write(completion: () -> Void) {
         do {
             try realm.write {
