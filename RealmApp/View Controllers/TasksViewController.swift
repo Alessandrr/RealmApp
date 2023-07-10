@@ -54,13 +54,41 @@ class TasksViewController: UITableViewController {
         return cell
     }
     
-    //MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let task = indexPath.section == 0
         ? currentTasks[indexPath.row]
-        : currentTasks[indexPath.row]
+        : completedTasks[indexPath.row]
         
-        return UISwipeActionsConfiguration()
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            StorageManager.shared.delete(task)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        if task.isComplete {
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] _, _, isDone in
+            showAlert(with: task) {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            isDone(true)
+        }
+        
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { [unowned self] _, _, isDone in
+            StorageManager.shared.done(task)
+            tableView.moveRow(at: indexPath, to: IndexPath(row: completedTasks.count - 1, section: 1))
+            isDone(true)
+        }
+        
+        editAction.backgroundColor = .orange
+        doneAction.backgroundColor = .green
+        
+        return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @objc private func addButtonPressed() {
