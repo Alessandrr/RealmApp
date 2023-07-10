@@ -12,6 +12,7 @@ class TaskListsViewController: UITableViewController {
     
     private var taskLists: Results<TaskList>!
 
+    //MARK: - View controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         let addButton = UIBarButtonItem(
@@ -89,6 +90,7 @@ class TaskListsViewController: UITableViewController {
         tasksVC.taskList = taskList
     }
     
+    //MARK: - IB Actions
     @IBAction func sortingList(_ sender: UISegmentedControl) {
         taskLists = sender.selectedSegmentIndex == 1
         ? taskLists.sorted(byKeyPath: "name")
@@ -97,14 +99,14 @@ class TaskListsViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    
+    //MARK: - Private functions
     @objc private func addItemPressed() {
         showAlert()
     }
     
     private func createTempData() {
         if !UserDefaults.standard.bool(forKey: "done") {
-            DataManager.shared.createTempData { [unowned self] in
+            DataManager.shared.createTempData() { [unowned self] in
                 UserDefaults.standard.set(true, forKey: "done")
                 tableView.reloadData()
             }

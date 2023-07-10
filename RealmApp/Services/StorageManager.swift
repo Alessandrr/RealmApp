@@ -24,7 +24,7 @@ class StorageManager {
     
     func save(_ taskList: String, completion: (TaskList) -> Void) {
         write {
-            let taskList = TaskList(value: [taskList, Date.now])
+            let taskList = TaskList(value: [taskList, Date.now] as [Any])
             realm.add(taskList)
             completion(taskList)
         }
